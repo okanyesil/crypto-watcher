@@ -1,0 +1,33 @@
+### This file contain example requests how to use the app
+
+POST http://localhost:3000/auth/signup
+Content-Type: application/json
+
+{
+    "email": "okan1@gmail.com",
+    "password": "deneme123",
+    "passwordAgain": "deneme123",
+    "username": "okanyesil1",
+    "fullName":"Okan Yeşiloğlu"
+}
+
+### Login with mail
+
+POST http://localhost:3000/auth/signin
+Content-Type: application/json
+
+{
+    "email": "okan1@gmail.com",
+    "password": "deneme123"
+}
+
+
+### Login with username
+
+POST http://localhost:3000/auth/signin
+Content-Type: application/json
+
+{
+    "username": "okanyesil1",
+    "password": "deneme123"
+}
