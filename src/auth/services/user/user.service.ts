@@ -1,11 +1,14 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import { BadRequestException, ClassSerializerInterceptor, Injectable, NotFoundException, UseInterceptors } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CreateUser } from 'src/auth/dtos/create-user.dto';
 import { User } from 'src/auth/entitiy/user.entity';
-import { In, Repository } from 'typeorm';
+import {  Repository } from 'typeorm';
 import { randomBytes, scrypt as _scrypt } from 'crypto';
 import { promisify } from 'util';
 import { LoginDto } from 'src/auth/dtos/login.dto';
+import { UserResponse } from 'src/auth/dtos/user.dto';
+import { JwtService } from '@nestjs/jwt';
+import { jwtConstants } from 'src/auth/constants';
 
 const scrypt = promisify(_scrypt);
 
@@ -13,11 +16,13 @@ const scrypt = promisify(_scrypt);
 export class UserService {
 
     constructor(
-        @InjectRepository(User) private readonly userRepository: Repository<User>
+        @InjectRepository(User) private readonly userRepository: Repository<User>,
+        private jwtService: JwtService
     ){}
 
 
-    async createUser(user: CreateUser){
+    
+    async createUser(user: CreateUser): Promise<UserResponse>{
 
         const users = await this.userRepository.find({
             where: [
@@ -45,20 +50,31 @@ export class UserService {
         return this.userRepository.save(createUser);
     }
 
-   async signIn(user:Partial<LoginDto>) {
+   async signIn(user:Partial<LoginDto>){
     const findUser = await this.userRepository.findOne({
         where: [
             {username: user.username},
-            { email: user.email },
-            {password: user.password}
+            { email: user.email }
         ]
     });
 
-    if(!findUser) throw new BadRequestException('there is no user with this username/email');
-    
-    console.log(findUser);
-    
-    
+    if(!findUser) throw new NotFoundException('there is no user with this username/email');
+
+    const [salt, storedHash] = findUser.password.split('.');
+
+
+    const hash = await scrypt(salt, user.password, 32) as Buffer;
+
+    if(storedHash !== hash.toString('hex')) throw new BadRequestException('Wrong info please try again');
+
+    return findUser;
+   }
+
+   login(user: any) {
+    const payload = {username: user.username, sub: user.id}
+    return {
+        access_token: this.jwtService.sign(payload, {secret: jwtConstants.secret})
+    }
    }
 
 

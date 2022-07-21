@@ -4,10 +4,10 @@ POST http://localhost:3000/auth/signup
 Content-Type: application/json
 
 {
-    "email": "okan1@gmail.com",
-    "password": "deneme123",
-    "passwordAgain": "deneme123",
-    "username": "okanyesil1",
+    "email": "test@gmail.com",
+    "password": "test123",
+    "passwordAgain": "test123",
+    "username": "test",
     "fullName":"Okan Yeşiloğlu"
 }
 
@@ -28,6 +28,8 @@ POST http://localhost:3000/auth/signin
 Content-Type: application/json
 
 {
-    "username": "okanyesil1",
-    "password": "deneme123"
+    "username": "test",
+    "password": "test123"
 }
+
+
