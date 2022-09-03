@@ -7,6 +7,7 @@ import { User } from './auth/entitiy/user.entity';
 import { BinanceModule } from './binance/binance.module';
 import { WatcherModule } from './watcher/watcher.module';
 import { KucoinModule } from './kucoin/kucoin.module';
+import { GateModule } from './gate/gate.module';
 
 @Module({
   imports: [AuthModule,
@@ -18,7 +19,8 @@ import { KucoinModule } from './kucoin/kucoin.module';
   }),
   BinanceModule,
   WatcherModule,
-  KucoinModule
+  KucoinModule,
+  GateModule
   ],
   controllers: [AppController],
   providers: [AppService],

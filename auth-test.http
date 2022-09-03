@@ -45,7 +45,7 @@ GET http://localhost:3000
 ### Binance services Test
 
 POST http://localhost:3000/watcher/get  
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3QiLCJzdWIiOjExLCJpYXQiOjE2NjIxOTk5MzZ9.5JANM7kILfH7CSOpH7YNMvClCQhEyaISiYLxPT0qpmE
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3QiLCJzdWIiOjExLCJpYXQiOjE2NjIyMDIzNTR9.A5ThnLRaqDDDPnkSFEYgyqC7knX2S9HqIxWZn2a8rEE
 Content-Type: application/json
 
 {
