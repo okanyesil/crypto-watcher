@@ -4,6 +4,9 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
 import { User } from './auth/entitiy/user.entity';
+import { BinanceModule } from './binance/binance.module';
+import { WatcherModule } from './watcher/watcher.module';
+import { KucoinModule } from './kucoin/kucoin.module';
 
 @Module({
   imports: [AuthModule,
@@ -12,7 +15,10 @@ import { User } from './auth/entitiy/user.entity';
     database: 'db-crypto.sqlite',
     synchronize: true,
     entities: [User]
-  })
+  }),
+  BinanceModule,
+  WatcherModule,
+  KucoinModule
   ],
   controllers: [AppController],
   providers: [AppService],

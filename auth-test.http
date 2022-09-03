@@ -35,8 +35,20 @@ Content-Type: application/json
 ###
 
 GET http://localhost:3000/auth/profile
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3QiLCJzdWIiOjExLCJpYXQiOjE2NTk4NjkxMzZ9.WH6S4DmJDRbrbTnahh3orckavirShUG0hSAGoPGdPPs
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3QiLCJzdWIiOjExLCJpYXQiOjE2NjIxOTk5MzZ9.5JANM7kILfH7CSOpH7YNMvClCQhEyaISiYLxPT0qpmE
 
 ### Binance test
 
 GET http://localhost:3000
+
+
+### Binance services Test
+
+POST http://localhost:3000/watcher/get  
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3QiLCJzdWIiOjExLCJpYXQiOjE2NjIxOTk5MzZ9.5JANM7kILfH7CSOpH7YNMvClCQhEyaISiYLxPT0qpmE
+Content-Type: application/json
+
+{
+    "fromCrypto": "ADA",
+    "toCrypto": "USDT"
+}
