@@ -5,6 +5,7 @@ import { Serialize } from 'src/interceptors/serialize.interceptor';
 import { CreateUser } from './dtos/create-user.dto';
 import { LoginDto } from './dtos/login.dto';
 import { UserResponse } from './dtos/user.dto';
+import { JwtAuthGuard } from './jwt-auth.guard';
 import { LocalAuthGuard } from './local-auth.guard';
 import { UserService } from './services/user/user.service';
 
@@ -31,10 +32,10 @@ export class AuthController {
        return this.userService.login(req.user);
     }
 
-    
-    @Get('/hi')
-    sayHi() {
-        return "Hi! there";
+    @UseGuards(JwtAuthGuard)
+    @Get('profile')
+    getProfile(@Request() req){
+        return req.user;
     }
 
 }
